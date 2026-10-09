@@ -1,7 +1,14 @@
-{config, pkgs, ...}:{
+{config, pkgs, inputs, ...}:{
     imports = [
         ./modules/default.nix
     ];
+
+    # _module.args = {
+    #     inherit inputs;
+
+    # };
+    # extraSpecialArgs = {
+    # };
 
     home.username = "pepe";
     home.homeDirectory = "/home/pepe";

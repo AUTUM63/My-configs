@@ -4,5 +4,6 @@
         ./starship.nix
         ./git.nix
         ./zsh.nix
+        ./Firefox.nix
     ];
 }
