@@ -3,12 +3,12 @@
         ./modules/default.nix
     ];
 
-    # _module.args = {
-    #     inherit inputs;
+     #_module.args = {
+     #    inherit inputs;
+    #};
 
-    # };
-    # extraSpecialArgs = {
-    # };
+     #extraSpecialArgs = {
+     #};
 
     home.username = "pepe";
     home.homeDirectory = "/home/pepe";
