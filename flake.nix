@@ -16,7 +16,7 @@
 		
 		
 	};
-	outputs = { nixpkgs, home-manager, self, flake-utils, ... } @inputs:
+	outputs = { nixpkgs, home-manager, self, flake-utils, ... } @inputs:	
 		let
 			system = "x86_64-linux";
 			outputs = self;   
@@ -26,19 +26,27 @@
         modules = [ 
           ./configuration.nix
         	home-manager.nixosModules.home-manager {
-										home-manager.useUserPackages = true;
-                    home-manager.useGlobalPkgs = true;
-										home-manager.extraSpecialArgs = inherit inputs;
-									  home-manager.users.pepe = import ./home-manager/home.nix;
-										home-manager.backupFileExtension = "backup";
-             
-					}
+						home-manager = {
+						useUserPackages = true;
+						useGlobalPkgs = true;
+						extraSpecialArgs = { inherit inputs;}; 
+						users.pepe = import ./home-manager/home.nix;
+						backupFileExtension = "backup";
+						};
+          }
                    
         ];
         specialArgs = {
           inherit inputs outputs;
         };
 		  };	
-		
+			flake-utils.lib.eachDefaultSystem = (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in {
+        # devShells.default = import ./shell.nix {inherit pkgs;};
+        formatter = nixpkgs.legacyPackages.${system}.alejandra;
+      }
+     );
 		};
 }
