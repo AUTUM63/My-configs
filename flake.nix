@@ -40,13 +40,11 @@
           inherit inputs outputs;
         };
 		  };	
-			flake-utils.lib.eachDefaultSystem = (
-      system: let
-        pkgs = nixpkgs.legacyPackages.${system};
+		}	// flake-utils.lib.eachDefaultSystem ( system: let
+        pkgs = nixpkgs.legacyPackages."${system}";
       in {
-        # devShells.default = import ./shell.nix {inherit pkgs;};
-        formatter = nixpkgs.legacyPackages.${system}.alejandra;
+        devShells.default = import ./shell.nix {inherit pkgs;};
+        formatter = pkgs.alejandra;
       }
      );
-		};
-}
+ }
